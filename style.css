@@ -1,0 +1,8 @@
+textarea {
+    resize: none;
+    font-size: 18px;
+}
+
+.form-select {
+    font-size: 16px;
+}

@@ -4,6 +4,8 @@ const AWSconfig = AWS.config.loadFromPath('./config.json')
 const fs = require('fs')
 const translate = new AWS.Translate(AWSconfig)
 const polly = new AWS.Polly(AWSconfig)
+const Blob = require('buffer')
+const uuid = require('uuid')
 
 class AwsController {
 
@@ -38,11 +40,13 @@ class AwsController {
                 console.log('err', err)
                 return
             }
+            const NameOfAudio = randomNameOfAudio()
             if (data.AudioStream) {
-                fs.writeFile('voice.mp3', data.AudioStream, (err) => {
+
+                fs.writeFile(`${NameOfAudio}.mp3`, data.AudioStream, (err) => {
 
                 })
-                res.json(data.AudioStream)
+                res.json(NameOfAudio);
             }
         })
     }
@@ -94,6 +98,10 @@ function doValidateLanguageCode(languageCode) {
             break;
     }
     return voiceId;
+}
+
+function randomNameOfAudio() {
+    return uuid.v4().split("-")[0] + uuid.v4().split("-")[4]
 }
 
 

@@ -36,7 +36,10 @@ function getParamTranslate() {
     return param
 }
 
-function doSynthesizeSpeechhInput() {
+var countDoSynthesizeSpeech = 0;
+
+async function doSynthesizeSpeechhInput() {
+    
     var text = document.getElementById('inputText').value.trim();
     var sourceDropdown = document.getElementById("sourceLanguageCodeDropdown");
     var sourceLanguageCode = sourceDropdown.options[sourceDropdown.selectedIndex].value;
@@ -45,10 +48,11 @@ function doSynthesizeSpeechhInput() {
         text: text,
         languageCode: sourceLanguageCode
     }
-
-    doSynthesizeSpeech(param)
-
-    // setTimeout(playAudioInput(), 1500)
+    
+    const src =await doSynthesizeSpeech(param)
+    playAudioInput(src)
+    countDoSynthesizeSpeech++;
+    console.log(countDoSynthesizeSpeech)
 }
 
 function doSynthesizeSpeechOutput() {
@@ -77,19 +81,14 @@ async function doSynthesizeSpeech(param) {
     })
     const data = await respone.json()
     console.log(data)
+    return data
 }
 
 
 
-function playAudioInput() {
+function playAudioInput(src) {
+    addSrcToAudio(src)
     var audioInput = document.getElementById('audioInput')
-    var audioOutput = document.getElementById('audioOutput')
-
-    if (audioOutput.duration > 0 && !audioOutput.paused) {
-        audioOutput.pause();
-        audioOutput.currentTime = 0;
-    }
-
     audioInput.play()
 }
 
@@ -119,4 +118,9 @@ function pauseAudioOutput() {
         audioOutput.pause();
         audioOutput.currentTime = 0;
     }
+}
+
+
+function addSrcToAudio(src){
+    document.getElementById('audioInput').setAttribute('src',`../../${src}.mp3`)
 }

@@ -119,11 +119,11 @@
                         <button class="poly-btn btn" onclick="doSynthesizeSpeechhInput()">
                             <i class="fa fa-volume-up text-light"></i>
                         </button>
-                        <button class="clear-btn btn" onclick="clearInputs()">Clear</button>
+                        <button class="clear-btn btn" onclick="clearInput()">Clear</button>
                         <button class="btn upload-btn" id="upload" onclick="loadFileAsText()"><i
                                 class="fa fa-upload text-light"></i></button>
                         <button class="download-btn btn"><i class="fa fa-download"
-                                onclick="Export2Word()"></i></button>
+                                onclick="downloadInput()"></i></button>
                                 <audio id="audioInput" type="audio/mpeg"></audio>
                     </div>
                     
@@ -215,12 +215,12 @@
                         
                     </div>
                     <textarea id="outputText" name="outputText" rows="10" cols="80"
-                        placeholder="Translated text..."></textarea>
+                        placeholder="Translated text..." disabled="true"></textarea>
                     <div class="group-btn">
                         <button class="poly-btn btn"><i
                                 class="fa fa-volume-up text-light"></i></button>
                         <button class="download-btn btn"><i class="fa fa-download"
-                                onclick="Export2Word1()"></i></button>
+                                onclick="download(document.getElementById('outputText').value)"></i></button>
                                 <!-- <h1>
                                     haha <audio id="audioOutput" src="../../voice.mp3"></audio>
                                     <button onclick="playAudioInput()">play</button>

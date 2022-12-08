@@ -11,7 +11,8 @@
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
         crossorigin="anonymous" />
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>AWS Translate</title>
+    <link rel="icon" type="image/x-icon" href="translation-icon.ico">
     <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1048.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
@@ -21,12 +22,15 @@
         
     </style>
     <div class="container">
-        <h1>TRANSLATE WEBPAGE</h1>
+        <div class="navbar">
+            <img class="AWSlogo" src="https://pronto-core-cdn.prontomarketing.com/2/wp-content/uploads/sites/3237/2021/01/aws-black-logo.png"/>
+            <h1>TRANSLATE WEBPAGE</h1>
+        </div>        
         <div class="sub-container">
             <div class="content">
                 <div class="left-side">
                     <div class="select-language">
-                        <p>Source Language Code: 
+                        <p>Source Language Code
                             <select class="form-select" id="sourceLanguageCodeDropdown">
                                 <option value="auto">Auto</option>
                                 <option value="af">Afrikaans</option>
@@ -124,12 +128,12 @@
                     </div>
                     
                 </div>
-                <div class="swap">
+                <!-- <div class="swap">
                     <button class="swap" onclick="swapText()">Swap</button>
-                </div>
+                </div> -->
                 <div class="right-side">
                     <div class="select-language">
-                        <p>Target Language Code:
+                        <p>Target Language Code
                             <select class="form-select" id="targetLanguageCodeDropdown" onchange="doTranslate()">
                                 <option value="af">Afrikaans</option>
                                 <option value="sq">Albanian</option>
@@ -226,28 +230,42 @@
                 </div>
             </div>
         </div>
-        <div class="textract">
-            <p>Textract image</p>
-            <form method="POST" , action="/extracttext" , enctype="multipart/form-data"
-                class="main__menu--tool-form1">
-                <input style="color:black" type="file" , name="filename" , id="filename"
-                    class="filebutton" />
-                <button type="submit" class="btn btn-primary">EXTRACT</button>
-                <!--                <button class="btn btn-success" onclick="Export2Word();">DOWNLOAD FILE</button>-->
-
-            </form>
-
+        <div class="sub-container-bottom">
+            <div class="textract">
+                <p>Textract image</p>
+                <form method="POST" , action="/extracttext" , enctype="multipart/form-data"
+                    class="main__menu--tool-form1">
+                    <input style="color:black" type="file" , name="filename" , id="filename"
+                        class="filebutton" />
+                    <button type="submit" class="btn btn-primary">EXTRACT</button>
+                    <!--                <button class="btn btn-success" onclick="Export2Word();">DOWNLOAD FILE</button>-->
+    
+                </form>
+    
+            </div>
+            <div class="translate-document">
+                <p>Translate document</p>
+                <form method="POST" , action="/translatedocument" , enctype="multipart/form-data"
+                    class="main__menu--tool-form1">
+                    <input style="color:black" type="file" , name="filenameDocument" ,
+                        id="filenameDocument" class="filebutton" />
+                    <!--                <button class="btn btn-success" onclick="Export2Word();">DOWNLOAD FILE</button>-->
+                    <button type="submit" id="btnDocument" class="btn btn-primary"">EXTRACT</button>
+    
+                </form>
+            </div>
         </div>
-        <div class="translate-document">
-            <p>Translate document</p>
-            <form method="POST" , action="/translatedocument" , enctype="multipart/form-data"
-                class="main__menu--tool-form1">
-                <input style="color:black" type="file" , name="filenameDocument" ,
-                    id="filenameDocument" class="filebutton" />
-                <!--                <button class="btn btn-success" onclick="Export2Word();">DOWNLOAD FILE</button>-->
-                <button type="submit" id="btnDocument" class="btn btn-primary"">EXTRACT</button>
-
-            </form>
+       
+        <div class="footer">
+            <div>
+                <p>Nhóm 52: Amazon Translate - Viết ứng dụng minh họa</p>
+                <p>GVHD: TS. Huỳnh Xuân Phụng</p>
+            </div>
+            <div>
+                <p>SVTH: Ngô Hoàng Duy 19145166</p>
+                <p>SVTH: Bùi Công Danh 19110008</p>
+            </div>            
+            
         </div>
     </div>
 

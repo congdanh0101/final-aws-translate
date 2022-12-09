@@ -116,7 +116,7 @@
                         placeholder="Enter text..." onkeyup="doTranslate()"></textarea>
 
                     <div class="group-btn">
-                        <button class="poly-btn btn" onclick="doSynthesizeSpeechhInput()">
+                        <button class="poly-btn btn" onclick="doSynthesizeSpeechInput()">
                             <i class="fa fa-volume-up text-light"></i>
                         </button>
                         <button class="clear-btn btn" onclick="clearInput()">Clear</button>
@@ -215,17 +215,13 @@
                         
                     </div>
                     <textarea id="outputText" name="outputText" rows="10" cols="80"
-                        placeholder="Translation" disabled="true"></textarea>
+                        placeholder="Translated text..." disabled="true"></textarea>
                     <div class="group-btn">
-                        <button class="poly-btn btn"><i
+                        <button class="poly-btn btn" onclick="doSynthesizeSpeechOutput()"><i
                                 class="fa fa-volume-up text-light"></i></button>
                         <button class="download-btn btn"><i class="fa fa-download"
                                 onclick="download(document.getElementById('outputText').value)"></i></button>
-                                <!-- <h1>
-                                    haha <audio id="audioOutput" src="../../voice.mp3"></audio>
-                                    <button onclick="playAudioInput()">play</button>
-                                    <button onclick="pauseAudioInput()">pause</button>
-                                 </h1> -->
+                                <audio id="audioOutput" type="audio/mpeg"></audio>
                     </div>
                 </div>
             </div>

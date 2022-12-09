@@ -33,12 +33,13 @@ function getParamTranslate() {
         TargetLanguageCode: targetLanguageCode,
         Text: inputText
     }
+    console.log(param)
     return param
 }
 
 var countDoSynthesizeSpeech = 0;
 
-async function doSynthesizeSpeechhInput() {
+async function doSynthesizeSpeechInput() {
     
     var text = document.getElementById('inputText').value.trim();
     var sourceDropdown = document.getElementById("sourceLanguageCodeDropdown");
@@ -63,8 +64,8 @@ async function doSynthesizeSpeechhInput() {
     console.log(countDoSynthesizeSpeech)
 }
 
-function doSynthesizeSpeechOutput() {
-    var text = document.getElementById('inputText').value.trim();
+async function doSynthesizeSpeechOutput() {
+    var text = document.getElementById('outputText').value.trim();
     var targetDropdown = document.getElementById("targetLanguageCodeDropdown");
     var targetLanguageCode = targetDropdown.options[targetDropdown.selectedIndex].value;
 
@@ -72,7 +73,19 @@ function doSynthesizeSpeechOutput() {
         text: text,
         languageCode: targetLanguageCode
     }
-    return param
+    console.log(param)
+
+    const src =await doSynthesizeSpeech(param)
+    if(src === 'blank') {
+        alert("Vui lòng nhập văn bản bạn muốn dịch"); 
+        exit(); 
+    }
+    else if(src === 'language') {
+        alert("Hiện tại chưa hỗ trợ giọng nói cho ngôn ngữ \"" + param.languageCode + "\""); 
+        exit(); 
+    }
+    else playAudioOutput(src)
+
 }
 
 async function doSynthesizeSpeech(param) {
@@ -96,39 +109,62 @@ async function doSynthesizeSpeech(param) {
 
 
 function playAudioInput(src) {
-    addSrcToAudio(src)
+    addSrcToAudioInput(src)
     var audioInput = document.getElementById('audioInput')
     audioInput.play()
 }
 
-function pauseAudioInput() {
-    var audioInput = document.getElementById('audioInput')
-    if (audioInput.duration > 0 && !audioInput.paused) {
-        audioInput.pause();
-        audioInput.currentTime = 0;
-    }
-}
 
-function playAudioOutput() {
-    var audioInput = document.getElementById('audioInput')
+function playAudioOutput(src) {
+    addSrcToAudioOutput(src)
     var audioOutput = document.getElementById('audioOutput')
-
-    if (audioInput.duration > 0 && !audioInput.paused) {
-        audioInput.pause();
-        audioInput.currentTime = 0;
-    }
-
     audioOutput.play()
 }
 
-function pauseAudioOutput() {
-    var audioOutput = document.getElementById('audioOutput')
-    if (audioOutput.duration > 0 && !audioOutput.paused) {
-        audioOutput.pause();
-        audioOutput.currentTime = 0;
-    }
+
+function addSrcToAudioInput(src){
+    document.getElementById('audioInput').setAttribute('src',`../../mp3/${src}.mp3`)
 }
 
+function addSrcToAudioOutput(src){
+    document.getElementById('audioOutput').setAttribute('src',`../../mp3/${src}.mp3`)
+}
+
+
+
+function clearInput(){
+    document.getElementById('inputText').value = "";
+    document.getElementById('outputText').value = "";
+}
+function download(value){
+    function dataUrl(data){return "data:x-application/text;charset=utf-8,"+encodeURIComponent(data)}
+    window.open(dataUrl(value))
+}
+
+function swap(){
+    var input = document.getElementById('inputText')
+    var output = document.getElementById('outputText')
+    var targetDropdown = document.getElementById("targetLanguageCodeDropdown");
+    var sourceDropdown = document.getElementById("sourceLanguageCodeDropdown");
+
+    if(sourceDropdown.options[sourceDropdown.selectedIndex].value==='auto'){
+        alert(`Can not swap with language auto`)
+        exit()
+    }
+
+    var inputValue = input.value
+    var outputValue = output.value
+    input.value = outputValue
+    output.value = inputValue
+
+
+    var temp ;
+    temp = sourceDropdown.value
+    sourceDropdown.value =  targetDropdown.value
+    targetDropdown.value = temp
+
+    // doTranslate()
+}
 
 function addSrcToAudio(src){
     document.getElementById('audioInput').setAttribute('src',`../../mp3/${src}.mp3`)

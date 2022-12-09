@@ -50,7 +50,15 @@ async function doSynthesizeSpeechhInput() {
     }
     
     const src =await doSynthesizeSpeech(param)
-    playAudioInput(src)
+    if(src === 'blank') {
+        alert("Vui lòng nhập văn bản bạn muốn dịch"); 
+        exit(); 
+    }
+    else if(src === 'language') {
+        alert("Hiện tại chưa hỗ trợ giọng nói cho ngôn ngữ \"" + param.languageCode + "\""); 
+        exit(); 
+    }
+    else playAudioInput(src)
     countDoSynthesizeSpeech++;
     console.log(countDoSynthesizeSpeech)
 }
@@ -80,8 +88,9 @@ async function doSynthesizeSpeech(param) {
         body: JSON.stringify(param)
     })
     const data = await respone.json()
-    console.log(data)
-    return data
+    if(data.message ==='language')return data.message
+    else if(data.message ==='blank')return `blank`
+    else return data
 }
 
 
@@ -122,5 +131,40 @@ function pauseAudioOutput() {
 
 
 function addSrcToAudio(src){
-    document.getElementById('audioInput').setAttribute('src',`../../${src}.mp3`)
+    document.getElementById('audioInput').setAttribute('src',`../../mp3/${src}.mp3`)
+}
+
+
+function clearInput(){
+    document.getElementById('inputText').value = "";
+    document.getElementById('outputText').value = "";
+}
+function download(value){
+    function dataUrl(data){return "data:x-application/text,"+escape(data)}
+    window.open(dataUrl(value))
+}
+
+function swap(){
+    var input = document.getElementById('inputText')
+    var output = document.getElementById('outputText')
+    var targetDropdown = document.getElementById("targetLanguageCodeDropdown");
+    var sourceDropdown = document.getElementById("sourceLanguageCodeDropdown");
+
+    if(sourceDropdown.options[sourceDropdown.selectedIndex].value==='auto'){
+        alert(`Can not swap with language auto`)
+        exit()
+    }
+
+    var inputValue = input.value
+    var outputValue = output.value
+    input.value = outputValue
+    output.value = inputValue
+
+
+    var temp ;
+    temp = sourceDropdown.value
+    sourceDropdown.value =  targetDropdown.value
+    targetDropdown.value = temp
+
+    // doTranslate()
 }

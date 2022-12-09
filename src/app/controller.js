@@ -43,7 +43,7 @@ class AwsController {
             const NameOfAudio = randomNameOfAudio()
             if (data.AudioStream) {
 
-                fs.writeFile(`${NameOfAudio}.mp3`, data.AudioStream, (err) => {
+                fs.writeFile(`./mp3/${NameOfAudio}.mp3`, data.AudioStream, (err) => {
 
                 })
                 res.json(NameOfAudio);

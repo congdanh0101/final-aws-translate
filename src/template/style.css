@@ -108,6 +108,7 @@ textarea {
     font-size: 1.6rem;
     padding-left: 10px;
     padding-top: 10px;
+    resize: none;
 }
 
 .group-btn {
@@ -168,4 +169,9 @@ textarea {
 .footer>div>p {
     font-size: 1.4rem;
     color: #fff;
+}
+
+.btn:hover {
+    background-color: green;
+    cursor: pointer;
 }

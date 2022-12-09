@@ -166,14 +166,41 @@ function swap(){
     // doTranslate()
 }
 
-function readFile(){
-    document.getElementById('filenameDocument')
-            .addEventListener('change', function() {
-              
-            var fr=new FileReader();
-            fr.readAsText(this.files[0]);
-            fr.onload = function () {
-            console.log(fr.result);
-    };  
-        })
+function addSrcToAudio(src){
+    document.getElementById('audioInput').setAttribute('src',`../../mp3/${src}.mp3`)
+}
+
+
+function clearInput(){
+    document.getElementById('inputText').value = "";
+    document.getElementById('outputText').value = "";
+}
+function download(value){
+    function dataUrl(data){return "data:x-application/text,"+escape(data)}
+    window.open(dataUrl(value))
+}
+
+function swap(){
+    var input = document.getElementById('inputText')
+    var output = document.getElementById('outputText')
+    var targetDropdown = document.getElementById("targetLanguageCodeDropdown");
+    var sourceDropdown = document.getElementById("sourceLanguageCodeDropdown");
+
+    if(sourceDropdown.options[sourceDropdown.selectedIndex].value==='auto'){
+        alert(`Can not swap with language auto`)
+        exit()
+    }
+
+    var inputValue = input.value
+    var outputValue = output.value
+    input.value = outputValue
+    output.value = inputValue
+
+
+    var temp ;
+    temp = sourceDropdown.value
+    sourceDropdown.value =  targetDropdown.value
+    targetDropdown.value = temp
+
+    // doTranslate()
 }

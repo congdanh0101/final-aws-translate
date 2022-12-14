@@ -179,3 +179,7 @@ textarea:disabled {
     border-radius: 2px;
 
 }
+.btn:hover {
+    cursor: pointer;
+    background-color: green;
+}

@@ -3,6 +3,7 @@ const AWSconfig = AWS.config.loadFromPath('./config.json')
 const fs = require('fs')
 const translate = new AWS.Translate(AWSconfig)
 const polly = new AWS.Polly(AWSconfig)
+const s3 = new AWS.S3(AWSconfig)
 const Blob = require('buffer')
 const uuid = require('uuid')
 class AwsController {
@@ -40,8 +41,6 @@ class AwsController {
             }
             const NameOfAudio = randomNameOfAudio()
             if (data.AudioStream) {
-                // fs.writeFile(`./mp3/${NameOfAudio}.mp3`, data.AudioStream, (err) => {
-                // })
                 const filename = `${NameOfAudio}.mp3`
                 const bucket = 'translate-nodejs/mp3'
                 const link = await uploadAudio(filename, bucket, data.AudioStream)
@@ -50,13 +49,6 @@ class AwsController {
             }
         })
     }
-
-    uploadFileS3(req, res) {
-        const bucket = 'translate-nodejs'
-
-    }
-
-
 }
 
 function uploadAudio(filename, bucketname, file) {
@@ -68,12 +60,6 @@ function uploadAudio(filename, bucketname, file) {
             ContentType: 'audio/mpeg',
             ACL: 'public-read'
         }
-        const s3 = new AWS.S3({
-            accessKeyId: "ASIAZDQBBYPZZMZD5NG7",
-            secretAccessKey: "LRnJ6Krj1cka1YTirky2he63uNf0WhCk27FHSY3r",
-            sessionToken: 'FwoGZXIvYXdzEMb//////////wEaDBI6bXEx3AMaEPS6wiLPAQwL2M0X+bIlByWhBc6HR7cebZdZ1+jrTuhd8UDNoknvshxTP0qbdCQ66TtbfDfHydg22vITuVwviXUUny5IR5rvRM/cLiFo5M2c3PcK1VGqNeop23l/xIjUnGY2/bHvil1auGiocGaqW3U1/b+N7jH2scv6+KdeqE7q3Tegs8MVYOFlNQ39zpcG9oZOBQzLUF1kE1MW8rlFPVdoV1V9rncWGXydhb0lRUfNJRTE5+aOSuNlC9j4b5KhdieFXJVpwt0OiJJuZrUBMuV8xLchOiie2eicBjItK2Zh9H1E8LMpP7ofxHQ8b+2ddmalAoQ+c9GmEkEEXZ8v9Dn5cEySRBnalet4'
-        })
-
         s3.upload(params, (err, data) => {
             if (err) reject(err)
             else resolve(data)

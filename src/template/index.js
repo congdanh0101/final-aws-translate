@@ -4,8 +4,8 @@
 // AWS.config.credentials = new AWS.Credentials("AKIAVONMUA2J7QLZUT5W", "XTajl2OGK+gbqZP997lQqIxg7HYU8MOy+wTTyfIZ");
 // var polly = new AWS.Polly();
 
-const URL_SERVER = `https://3.94.8.37:3000`
-//const URL_SERVER = `http://localhost:3000`
+// const URL_SERVER = `https://3.94.8.37:3000`
+const URL_SERVER = `https://localhost:3000`
 
 async function doTranslate() {
     const respone = await fetch(`${URL_SERVER}/translate`, {
@@ -130,10 +130,12 @@ function playAudioOutput(src) {
 
 
 function addSrcToAudioInput(src) {
-    document.getElementById('audioInput').setAttribute('src', `../../mp3/${src}.mp3`)
+    // document.getElementById('audioInput').setAttribute('src', `https://translate-nodejs.s3.amazonaws.com/mp3/${src}.mp3`)
+    document.getElementById('audioInput').setAttribute('src', `../../ mp3 / ${ src }.mp3`)
 }
 
 function addSrcToAudioOutput(src) {
+    // document.getElementById('audioOutput').setAttribute('src', `https://translate-nodejs.s3.amazonaws.com/mp3/${src}.mp3`)
     document.getElementById('audioOutput').setAttribute('src', `../../mp3/${src}.mp3`)
 }
 

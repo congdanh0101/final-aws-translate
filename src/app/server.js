@@ -4,6 +4,7 @@ const app = express()
 const cors = require('cors')
 const fs = require('fs')
 const router = require('./route')
+const https = require('https')
 app.use(express.json())
 app.use(cors())
 // const AWSconfig = AWS.config.loadFromPath('./config.json')
@@ -45,4 +46,11 @@ app.use(cors())
 // })
 app.use(router)
 
-app.listen(3000, () => console.log(`Server is running at port ${3000}`))
+https.createServer({
+	key: fs.readFileSync('./key.pem'),
+	cert: fs.readFileSync('./cert.pem'),
+},app).listen(3000, () => console.log(`Server is running at port ${3000}`))
+
+app.get('/',(req,res) =>{
+res.send("Hello from express server.")
+})

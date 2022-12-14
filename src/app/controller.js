@@ -1,4 +1,3 @@
-const axios = require('axios')
 const AWS = require('aws-sdk')
 const AWSconfig = AWS.config.loadFromPath('./config.json')
 const fs = require('fs')

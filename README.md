@@ -3,7 +3,7 @@
 ### Ngô Hoàng Duy - 19145166
 
 * [Instruction video](https://youtu.be/m7r4jm9pEsM)
-* [PDF Report](https://drive.google.com/file/d/1IPw1sedefWLz_RHabG_HmEWUCE4pOiRP/view?usp=sharing)
+* [Report](https://drive.google.com/drive/folders/15DkKBYTFSoplGHj4sH5EAQHydczxH9pb?usp=share_link)
 
 ## Table of contents
 * [Overview](#overview)
